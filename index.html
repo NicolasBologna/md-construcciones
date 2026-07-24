@@ -298,8 +298,53 @@
             </div>
         </section>
 
+        <!-- Regularización Checklist -->
+        <section class="section-spacing px-margin-mobile md:px-margin-desktop bg-surface-container-lowest" id="regularizacion">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="kicker kicker-accent mb-4 block">Herramienta</span>
+                    <h2 class="title-lg">¿Tu documentación está completa?</h2>
+                    <p class="copy-md text-on-surface-variant mt-4">Completá el checklist y sabé si tu propiedad está lista para regularizar.</p>
+                </div>
+                <div class="grid grid-cols-1 gap-4" id="reg-checklist">
+                    <label class="flex items-start gap-4 panel p-4 cursor-pointer hover:bg-surface-container transition-colors">
+                        <input type="checkbox" class="reg-check w-5 h-5 mt-1 accent-terracotta-technical shrink-0" data-label="Escritura o título de propiedad">
+                        <span class="copy-md">Escritura o título de propiedad</span>
+                    </label>
+                    <label class="flex items-start gap-4 panel p-4 cursor-pointer hover:bg-surface-container transition-colors">
+                        <input type="checkbox" class="reg-check w-5 h-5 mt-1 accent-terracotta-technical shrink-0" data-label="Partida inmobiliaria vigente">
+                        <span class="copy-md">Partida inmobiliaria vigente</span>
+                    </label>
+                    <label class="flex items-start gap-4 panel p-4 cursor-pointer hover:bg-surface-container transition-colors">
+                        <input type="checkbox" class="reg-check w-5 h-5 mt-1 accent-terracotta-technical shrink-0" data-label="Plano aprobado original">
+                        <span class="copy-md">Plano aprobado original</span>
+                    </label>
+                    <label class="flex items-start gap-4 panel p-4 cursor-pointer hover:bg-surface-container transition-colors">
+                        <input type="checkbox" class="reg-check w-5 h-5 mt-1 accent-terracotta-technical shrink-0" data-label="Informe técnico / memoria descriptiva">
+                        <span class="copy-md">Informe técnico / memoria descriptiva</span>
+                    </label>
+                    <label class="flex items-start gap-4 panel p-4 cursor-pointer hover:bg-surface-container transition-colors">
+                        <input type="checkbox" class="reg-check w-5 h-5 mt-1 accent-terracotta-technical shrink-0" data-label="Comprobantes de materiales o terminaciones">
+                        <span class="copy-md">Comprobantes de materiales o terminaciones</span>
+                    </label>
+                    <label class="flex items-start gap-4 panel p-4 cursor-pointer hover:bg-surface-container transition-colors">
+                        <input type="checkbox" class="reg-check w-5 h-5 mt-1 accent-terracotta-technical shrink-0" data-label="Certificado de terminación de obra">
+                        <span class="copy-md">Certificado de terminación de obra</span>
+                    </label>
+                    <label class="flex items-start gap-4 panel p-4 cursor-pointer hover:bg-surface-container transition-colors">
+                        <input type="checkbox" class="reg-check w-5 h-5 mt-1 accent-terracotta-technical shrink-0" data-label="Plano de mensura del lote">
+                        <span class="copy-md">Plano de mensura del lote</span>
+                    </label>
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <button class="site-btn site-btn-primary site-btn-large" id="reg-evaluate" type="button">Evaluar mi situación</button>
+                </div>
+                <div class="hidden panel p-6 mt-8 bg-surface-container" id="reg-result"></div>
+            </div>
+        </section>
+
         <!-- CTA / Contact Section -->
-        <section class="section-spacing px-margin-mobile md:px-margin-desktop bg-architectural-parchment relative overflow-hidden" id="contacto">
+        <section class="pt-section-padding pb-12 px-margin-mobile md:px-margin-desktop bg-architectural-parchment relative overflow-hidden" id="contacto">
             <div class="absolute top-0 right-0 w-1/3 h-full bg-slate-deep/5 -skew-x-12 translate-x-1/2"></div>
             <div class="max-w-container-max mx-auto relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
@@ -337,8 +382,8 @@
     </main>
 
     <!-- Footer Shell -->
-    <footer class="bg-primary text-white py-16 px-margin-mobile md:px-margin-desktop w-full mt-section-padding">
-        <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter border-b border-on-primary-container/10 pb-12 mb-12">
+    <footer class="bg-primary text-white py-16 px-margin-mobile md:px-margin-desktop w-full mt-0">
+        <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter">
             <div class="flex flex-col gap-6">
                 <div class="brand-mark text-architectural-parchment uppercase tracking-tight">MD Construcciones</div>
                 <p class="copy-md text-on-primary-container max-w-sm">

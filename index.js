@@ -256,4 +256,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { threshold: 0.35 });
     lineObserver.observe(processGrid);
   }
+
+  // 8. Regularización checklist
+  const regBtn = document.getElementById('reg-evaluate');
+  const regResult = document.getElementById('reg-result');
+  const regChecks = document.querySelectorAll('.reg-check');
+  if (regBtn && regResult && regChecks.length) {
+    regBtn.addEventListener('click', function () {
+      var missing = [];
+      regChecks.forEach(function (cb) {
+        if (!cb.checked) {
+          missing.push(cb.getAttribute('data-label'));
+        }
+      });
+      var html = '';
+      if (missing.length === 0) {
+        html = '<p class="title-md text-terracotta-technical mb-2">¡Tu documentación está completa!</p>' +
+               '<p class="copy-md mb-4">Escribinos para avanzar con la regularización.</p>' +
+               '<a class="site-btn site-btn-primary" href="https://wa.me/5493413663408">Consultar por WhatsApp</a>';
+      } else {
+        html = '<p class="title-md mb-2">Te falta para regularizar:</p>' +
+               '<ul class="list-disc pl-5 flex flex-col gap-2 mb-4">';
+        missing.forEach(function (item) {
+          html += '<li class="copy-md">' + item + '</li>';
+        });
+        html += '</ul>' +
+                '<p class="copy-md">No es obligatorio tener todo de entrada; igual podemos orientarte.</p>';
+      }
+      regResult.innerHTML = html;
+      regResult.classList.remove('hidden');
+      regResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
 });
