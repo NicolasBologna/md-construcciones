@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (media.type === 'video') {
           mediaEl = '<video class="gallery-image w-full h-full object-cover" src="' + src + '" controls playsinline preload="metadata"></video>';
         } else {
-          mediaEl = '<img class="gallery-image w-full h-full object-cover" alt="' + (media.alt || project.title) + '" src="' + src + '">';
+          mediaEl = '<img loading="lazy" decoding="async" class="gallery-image w-full h-full object-cover" alt="' + (media.alt || project.title) + '" src="' + src + '">';
         }
         var info;
         if (wide) {

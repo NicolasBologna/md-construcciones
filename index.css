@@ -71,7 +71,7 @@ html {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: 44px;
+  font-size: clamp(32px, 8vw, 64px);
   line-height: 1.05;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -371,9 +371,6 @@ html {
 }
 
 @media (max-width: 767px) {
-  .hero-title {
-    font-size: 48px;
-  }
 
   .title-lg {
     font-size: 32px;
@@ -410,9 +407,6 @@ html {
     padding-bottom: 120px;
   }
 
-  .hero-title {
-    font-size: 64px;
-  }
 }
 
 .blueprint-grid {
