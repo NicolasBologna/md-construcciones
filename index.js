@@ -291,14 +291,14 @@ document.addEventListener('DOMContentLoaded', function () {
       if (missing.length === 0) {
         html = '<p class="title-md text-terracotta-technical mb-2">¡Tu documentación está completa!</p>' +
                '<p class="copy-md mb-4">¿Querés enviarnos un mensaje con todos los documentos que tenés para comenzar el proceso?</p>' +
-               '<a class="site-btn site-btn-primary" href="' + whatsappUrl + '" target="_blank" rel="noopener noreferrer">Enviar documentos por WhatsApp</a>';
+               '<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#25D366] text-white font-body-md font-medium shadow hover:bg-[#1DAE52] transition-colors" href="' + whatsappUrl + '" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">chat</span> Enviar documentos por WhatsApp</a>';
       } else {
         html = '<p class="title-md mb-2">Te falta para regularizar:</p>' +
                '<ul class="list-disc pl-5 flex flex-col gap-2 mb-4">';
         missing.forEach(function (item) { html += '<li class="copy-md">' + item + '</li>'; });
         html += '</ul>' +
                 '<p class="copy-md mb-4">No es obligatorio tener todo de entrada. ¿Querés enviarnos un mensaje con lo que ya tenés para comenzar el proceso?</p>' +
-                '<a class="site-btn site-btn-primary" href="' + whatsappUrl + '" target="_blank" rel="noopener noreferrer">Enviar documentos por WhatsApp</a>';
+                '<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#25D366] text-white font-body-md font-medium shadow hover:bg-[#1DAE52] transition-colors" href="' + whatsappUrl + '" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">chat</span> Enviar documentos por WhatsApp</a>';
       }
       regResult.innerHTML = html;
       regResult.classList.remove('hidden');
