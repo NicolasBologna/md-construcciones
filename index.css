@@ -625,10 +625,16 @@ html {
 }
 
 .gallery-image {
-  transition: transform 0.85s var(--ease-out-expo);
+  filter: grayscale(70%) contrast(1.05);
+  transition: transform 0.85s var(--ease-out-expo), filter .4s ease;
+}
+
+.gallery-image.in-view {
+  filter: grayscale(0%) contrast(1.05);
 }
 
 .gallery-card:hover .gallery-image {
+  filter: grayscale(0%) contrast(1.05);
   transform: scale(1.07);
 }
 

@@ -288,4 +288,15 @@ document.addEventListener('DOMContentLoaded', function () {
       regResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   }
+
+  // Scroll-based color reveal for gallery images on touch devices
+  const galleryImages = document.querySelectorAll('.gallery-image');
+  if (galleryImages.length && window.matchMedia('(pointer: coarse)').matches) {
+    const colorObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('in-view', entry.isIntersecting);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    galleryImages.forEach(function (img) { colorObserver.observe(img); });
+  }
 });
