@@ -97,3 +97,162 @@ try {
   };
 } catch (_error) {
 }
+
+/* =====================================================
+   UI/UX interactions — less generic, more tactile
+   ===================================================== */
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+
+  // 1. Hero architectural watermark
+  const hero = document.querySelector('main > section');
+  if (hero) {
+    const watermark = document.createElement('div');
+    watermark.className = 'hero-watermark';
+    watermark.setAttribute('aria-hidden', 'true');
+    watermark.textContent = 'MD';
+    hero.insertBefore(watermark, hero.firstChild);
+  }
+
+  // 2. Render projects gallery from obras/proyectos.js
+  const galleryGrid = document.querySelector('#obras .grid');
+  const projects = window.mdProjects || [];
+  if (galleryGrid && projects.length) {
+    var galleryHtml = '';
+    projects.forEach(function (project) {
+      project.media.forEach(function (media, i) {
+        var wide = (i % 3 === 0);
+        var spanClass = wide ? 'md:col-span-8' : 'md:col-span-4';
+        var aspectClass = wide ? 'aspect-[16/9]' : 'aspect-[4/5]';
+        var src = encodeURI(media.src);
+        var mediaEl;
+        if (media.type === 'video') {
+          mediaEl = '<video class="gallery-image w-full h-full object-cover" src="' + src + '" controls playsinline preload="metadata"></video>';
+        } else {
+          mediaEl = '<img class="gallery-image w-full h-full object-cover" alt="' + (media.alt || project.title) + '" src="' + src + '">';
+        }
+        var info;
+        if (wide) {
+          info = '<div class="gallery-info flex justify-between items-center"><span class="title-md">' + project.title + '</span><span class="label-tech copy-muted">' + project.city + ', Santa Fe</span></div>';
+        } else {
+          info = '<div class="gallery-info"><span class="label-tech text-terracotta-technical block mb-1">' + (project.type || 'Obra').toUpperCase() + '</span><span class="title-md block">' + (media.alt || project.title) + '</span></div>';
+        }
+        galleryHtml += '<div class="group gallery-card ' + spanClass + ' reveal"><div class="' + aspectClass + ' overflow-hidden relative gallery-media">' + mediaEl + '</div>' + info + '</div>';
+      });
+    });
+    galleryGrid.innerHTML = galleryHtml;
+  }
+
+  // 3. Mobile menu
+  const menuToggle = document.getElementById('menu-toggle');
+  let menu = document.getElementById('mobile-menu');
+  let overlay = document.getElementById('mobile-menu-overlay');
+
+  if (menuToggle && !menu) {
+    overlay = document.createElement('div');
+    overlay.id = 'mobile-menu-overlay';
+    overlay.className = 'mobile-menu-overlay';
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(overlay);
+
+    menu = document.createElement('nav');
+    menu.id = 'mobile-menu';
+    menu.className = 'mobile-menu';
+    menu.setAttribute('aria-label', 'Menú móvil');
+    menu.innerHTML =
+      '<button id="mobile-menu-close" class="absolute top-6 right-6 text-white flex items-center justify-center" aria-label="Cerrar menú">' +
+        '<span class="material-symbols-outlined">close</span>' +
+      '</button>' +
+      '<a href="#servicios" class="mobile-link">Servicios</a>' +
+      '<a href="#obras" class="mobile-link">Proyectos</a>' +
+      '<a href="#estudio" class="mobile-link">Perfil</a>' +
+      '<a href="#contacto" class="mobile-link">Contacto</a>' +
+      '<a href="https://wa.me/5493413663408" target="_blank" class="mobile-link">Consultar Obra</a>';
+    document.body.appendChild(menu);
+
+    document.getElementById('mobile-menu-close').addEventListener('click', closeMenu);
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    overlay.addEventListener('click', closeMenu);
+  }
+
+  function openMenu () {
+    document.body.classList.add('menu-open');
+    if (menu) menu.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+  }
+
+  function closeMenu () {
+    document.body.classList.remove('menu-open');
+    if (menu) menu.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+  }
+
+  if (menuToggle) menuToggle.addEventListener('click', openMenu);
+
+  // 4. Scroll reveal
+  const revealTargets = document.querySelectorAll(
+    'section:not(:first-of-type), .service-card, .gallery-card, .faq-item, #metodologia .grid > div.relative.z-10'
+  );
+
+  revealTargets.forEach(function (el, i) {
+    el.classList.add('reveal');
+    // Avoid overwriting already-staggered HTML classes
+    const base = (i % 4) + 1;
+    if (!/\bstagger-/.test(el.className)) {
+      el.classList.add('stagger-' + base);
+    }
+  });
+
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+  revealTargets.forEach(function (el) { revealObserver.observe(el); });
+
+  // 5. Service card index numbers
+  const serviceCards = document.querySelectorAll('.service-card');
+  serviceCards.forEach(function (card, i) {
+    const num = document.createElement('span');
+    num.className = 'service-number';
+    num.textContent = String(i + 1).padStart(2, '0');
+    num.setAttribute('aria-hidden', 'true');
+    card.appendChild(num);
+  });
+
+  // 6. Gallery "Ver más" overlay
+  const galleryCards = document.querySelectorAll('.gallery-card');
+  galleryCards.forEach(function (card) {
+    const media = card.querySelector('div[class*="aspect-"]');
+    if (media) {
+      media.classList.add('gallery-media');
+      const view = document.createElement('a');
+      view.href = '#contacto';
+      view.className = 'gallery-view';
+      view.innerHTML = '<span class="material-symbols-outlined">open_in_full</span><span>Ver más</span>';
+      media.appendChild(view);
+    }
+  });
+
+  // 7. Process connecting-line fill
+  const processGrid = document.querySelector('#metodologia .grid');
+  if (processGrid) {
+    const fill = document.createElement('div');
+    fill.className = 'process-line-fill';
+    processGrid.appendChild(fill);
+
+    const lineObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          fill.classList.add('visible');
+          lineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    lineObserver.observe(processGrid);
+  }
+});
