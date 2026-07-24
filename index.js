@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
       '</button>' +
       '<a href="#servicios" class="mobile-link">Servicios</a>' +
       '<a href="#obras" class="mobile-link">Proyectos</a>' +
+      '<a href="#casa-predisenada" class="mobile-link">Casa prediseñada</a>' +
       '<a href="#estudio" class="mobile-link">Perfil</a>' +
       '<a href="#contacto" class="mobile-link">Contacto</a>' +
       '<a href="https://wa.me/5493413663408" target="_blank" class="mobile-link">Consultar Obra</a>';
