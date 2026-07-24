@@ -263,25 +263,42 @@ document.addEventListener('DOMContentLoaded', function () {
   const regChecks = document.querySelectorAll('.reg-check');
   if (regBtn && regResult && regChecks.length) {
     regBtn.addEventListener('click', function () {
+      var checked = [];
       var missing = [];
       regChecks.forEach(function (cb) {
-        if (!cb.checked) {
-          missing.push(cb.getAttribute('data-label'));
+        var label = cb.getAttribute('data-label');
+        if (cb.checked) {
+          checked.push(label);
+        } else {
+          missing.push(label);
         }
       });
+
+      var message = 'Hola, completé el checklist de regularización de MD Construcciones.\n\n';
+      if (checked.length) {
+        message += 'Tengo los siguientes documentos:\n';
+        checked.forEach(function (item) { message += '- ' + item + '\n'; });
+      }
+      if (missing.length) {
+        message += '\nMe falta:\n';
+        missing.forEach(function (item) { message += '- ' + item + '\n'; });
+      }
+      message += '\nQuisiera enviar los documentos que tengo para comenzar el proceso. ¿Me orientan?';
+
+      var whatsappUrl = 'https://wa.me/5493413663408?text=' + encodeURIComponent(message);
+
       var html = '';
       if (missing.length === 0) {
         html = '<p class="title-md text-terracotta-technical mb-2">¡Tu documentación está completa!</p>' +
-               '<p class="copy-md mb-4">Escribinos para avanzar con la regularización.</p>' +
-               '<a class="site-btn site-btn-primary" href="https://wa.me/5493413663408">Consultar por WhatsApp</a>';
+               '<p class="copy-md mb-4">¿Querés enviarnos un mensaje con todos los documentos que tenés para comenzar el proceso?</p>' +
+               '<a class="site-btn site-btn-primary" href="' + whatsappUrl + '" target="_blank" rel="noopener noreferrer">Enviar documentos por WhatsApp</a>';
       } else {
         html = '<p class="title-md mb-2">Te falta para regularizar:</p>' +
                '<ul class="list-disc pl-5 flex flex-col gap-2 mb-4">';
-        missing.forEach(function (item) {
-          html += '<li class="copy-md">' + item + '</li>';
-        });
+        missing.forEach(function (item) { html += '<li class="copy-md">' + item + '</li>'; });
         html += '</ul>' +
-                '<p class="copy-md">No es obligatorio tener todo de entrada; igual podemos orientarte.</p>';
+                '<p class="copy-md mb-4">No es obligatorio tener todo de entrada. ¿Querés enviarnos un mensaje con lo que ya tenés para comenzar el proceso?</p>' +
+                '<a class="site-btn site-btn-primary" href="' + whatsappUrl + '" target="_blank" rel="noopener noreferrer">Enviar documentos por WhatsApp</a>';
       }
       regResult.innerHTML = html;
       regResult.classList.remove('hidden');
